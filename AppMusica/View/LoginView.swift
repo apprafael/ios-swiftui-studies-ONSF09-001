@@ -1,19 +1,13 @@
+import Combine
 import SwiftUI
 import SwiftData
 
 struct LoginView: View {
     @Environment(\.modelContext) private var modelContext
-    @EnvironmentObject private var appState: AppState
+    @StateObject var viewModel = LoginViewModel()
+    @EnvironmentObject var appState: AppState
+    @Query var accounts: [UserAccount]
     
-    @Query private var accounts: [UserAccount]
-
-    @State private var user: String = ""
-    @State private var password: String = ""
-    @State private var isPasswordVisible: Bool = false
-
-    @State private var showAlert: Bool = false
-    @State private var alertMessage: String = ""
-
     var body: some View {
         NavigationStack {
             ZStack {
@@ -40,14 +34,14 @@ struct LoginView: View {
                     VStack(spacing: 14) {
                         TextGlassField(
                             title: "Usuário",
-                            text: $user,
+                            text: $viewModel.user,
                             isSecure: false
                         )
 
                         PasswordField(
                             title: "Senha",
-                            text: $password,
-                            isVisible: $isPasswordVisible
+                            text: $viewModel.password,
+                            isVisible: $viewModel.isPasswordVisible
                         )
                     }
                     .padding(.top, 8)
@@ -95,38 +89,22 @@ struct LoginView: View {
                 .padding(.horizontal, 34)
                 .padding(.top, 24)
             }
-            .alert("Login", isPresented: $showAlert) {
+            .alert("Login", isPresented: $viewModel.showAlert) {
                 Button("OK", role: .cancel) {}
             } message: {
-                Text(alertMessage)
+                Text(viewModel.alertMessage)
             }
+        }
+        .onChange(of: accounts) { _, _ in
+            viewModel.accounts = accounts
         }
     }
 
     private func login() {
-        let trimmedUser = user.trimmingCharacters(in: .whitespacesAndNewlines)
-        let trimmedPassword = password.trimmingCharacters(in: .whitespacesAndNewlines)
-
-        guard !trimmedUser.isEmpty, !trimmedPassword.isEmpty else {
-            alertMessage = "Preencha usuário e senha."
-            showAlert = true
-            return
-        }
-
-        guard let found = accounts.first(where: { $0.username.lowercased() == trimmedUser.lowercased() }) else {
-            alertMessage = "Usuário ou senha inválidos."
-            showAlert = true
-            return
-        }
-
-        guard found.password == trimmedPassword else {
-            alertMessage = "Usuário ou senha inválidos."
-            showAlert = true
-            return
-        }
-
-        withAnimation(.snappy) {
-            appState.route = .home
+        if viewModel.login() {
+            withAnimation(.snappy) {
+                appState.route = .home
+            }
         }
     }
 }

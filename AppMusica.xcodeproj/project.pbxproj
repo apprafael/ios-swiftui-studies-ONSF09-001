@@ -6,11 +6,27 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXContainerItemProxy section */
+		263435EB2F6EC3F90012B1ED /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 5C2D59552F49DED300DD23A8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 5C2D595C2F49DED300DD23A8;
+			remoteInfo = AppMusica;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		263435E72F6EC3F90012B1ED /* AppMusicaTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppMusicaTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		5C2D595D2F49DED300DD23A8 /* AppMusica.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppMusica.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		263435E82F6EC3F90012B1ED /* AppMusicaTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = AppMusicaTests;
+			sourceTree = "<group>";
+		};
 		5C2D595F2F49DED300DD23A8 /* AppMusica */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = AppMusica;
@@ -19,6 +35,13 @@
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		263435E42F6EC3F90012B1ED /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C2D595A2F49DED300DD23A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -33,6 +56,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2D595F2F49DED300DD23A8 /* AppMusica */,
+				263435E82F6EC3F90012B1ED /* AppMusicaTests */,
 				5C2D595E2F49DED300DD23A8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				5C2D595D2F49DED300DD23A8 /* AppMusica.app */,
+				263435E72F6EC3F90012B1ED /* AppMusicaTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,6 +73,29 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		263435E62F6EC3F90012B1ED /* AppMusicaTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 263435EF2F6EC3F90012B1ED /* Build configuration list for PBXNativeTarget "AppMusicaTests" */;
+			buildPhases = (
+				263435E32F6EC3F90012B1ED /* Sources */,
+				263435E42F6EC3F90012B1ED /* Frameworks */,
+				263435E52F6EC3F90012B1ED /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				263435EC2F6EC3F90012B1ED /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				263435E82F6EC3F90012B1ED /* AppMusicaTests */,
+			);
+			name = AppMusicaTests;
+			packageProductDependencies = (
+			);
+			productName = AppMusicaTests;
+			productReference = 263435E72F6EC3F90012B1ED /* AppMusicaTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		5C2D595C2F49DED300DD23A8 /* AppMusica */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5C2D59682F49DED400DD23A8 /* Build configuration list for PBXNativeTarget "AppMusica" */;
@@ -77,9 +125,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 2620;
+				LastSwiftUpdateCheck = 2630;
 				LastUpgradeCheck = 2620;
 				TargetAttributes = {
+					263435E62F6EC3F90012B1ED = {
+						CreatedOnToolsVersion = 26.3;
+						TestTargetID = 5C2D595C2F49DED300DD23A8;
+					};
 					5C2D595C2F49DED300DD23A8 = {
 						CreatedOnToolsVersion = 26.2;
 					};
@@ -100,11 +152,19 @@
 			projectRoot = "";
 			targets = (
 				5C2D595C2F49DED300DD23A8 /* AppMusica */,
+				263435E62F6EC3F90012B1ED /* AppMusicaTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		263435E52F6EC3F90012B1ED /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C2D595B2F49DED300DD23A8 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -115,6 +175,13 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		263435E32F6EC3F90012B1ED /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5C2D59592F49DED300DD23A8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -124,7 +191,55 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		263435EC2F6EC3F90012B1ED /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 5C2D595C2F49DED300DD23A8 /* AppMusica */;
+			targetProxy = 263435EB2F6EC3F90012B1ED /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		263435ED2F6EC3F90012B1ED /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = apprafael.AppMusicaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppMusica.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AppMusica";
+			};
+			name = Debug;
+		};
+		263435EE2F6EC3F90012B1ED /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = apprafael.AppMusicaTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = NO;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/AppMusica.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/AppMusica";
+			};
+			name = Release;
+		};
 		5C2D59662F49DED400DD23A8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -309,6 +424,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		263435EF2F6EC3F90012B1ED /* Build configuration list for PBXNativeTarget "AppMusicaTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				263435ED2F6EC3F90012B1ED /* Debug */,
+				263435EE2F6EC3F90012B1ED /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5C2D59582F49DED300DD23A8 /* Build configuration list for PBXProject "AppMusica" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
