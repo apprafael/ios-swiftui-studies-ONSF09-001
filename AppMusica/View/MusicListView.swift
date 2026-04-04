@@ -5,8 +5,10 @@
 //  Created by Jessica Costa on 07/03/26.
 //
 
+import Combine
 import SwiftUI
 import SwiftData
+import AVFoundation
 
 struct MusicListView: View {
     @EnvironmentObject private var appState: AppState
@@ -19,6 +21,8 @@ struct MusicListView: View {
     @State private var showSheet = false
     
     @Query var favorites: [Music]
+    
+    var playerViewModel = MusicPlayerViewModel()
     
     var body: some View {
         ZStack {
@@ -117,7 +121,12 @@ struct MusicListView: View {
                     }
                     .padding(.vertical, 4)
                     .sheet(isPresented: $showSheet) {
-                        Text("Sheet")
+                        Button("Play") {
+                            if let url = URL(string: item.previewUrl) {
+                                playerViewModel.player = AVPlayer(url: url)
+                                playerViewModel.player?.play()
+                            }
+                        }
                     }
                 //}
             }
@@ -172,6 +181,10 @@ struct MusicListView: View {
         
         isLoading = false
     }
+}
+
+class MusicPlayerViewModel: ObservableObject {
+    var player: AVPlayer?
 }
 
 // MARK: - Preview
