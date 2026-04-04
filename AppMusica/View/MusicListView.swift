@@ -121,11 +121,17 @@ struct MusicListView: View {
                     }
                     .padding(.vertical, 4)
                     .sheet(isPresented: $showSheet) {
+                        AsyncImage(url: URL(string: item.artworkUrl100))
+                        
                         Button("Play") {
                             if let url = URL(string: item.previewUrl) {
                                 playerViewModel.player = AVPlayer(url: url)
                                 playerViewModel.player?.play()
                             }
+                        }
+                        
+                        Button("Pause") {
+                            playerViewModel.player?.pause()
                         }
                     }
                 //}
