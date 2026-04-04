@@ -18,16 +18,19 @@ final class Music: Identifiable, Codable {
     var trackName: String
     var collectionName: String
     var trackViewUrl: String
+//    var previewUrl: String
+    var artworkUrl30: String
 
     // Identifiable conformance using trackId
     var id: Int { trackId }
 
     // Designated initializer for SwiftData and manual init
-    init(trackId: Int, trackName: String, collectionName: String, trackViewUrl: String) {
+    init(trackId: Int, trackName: String, collectionName: String, trackViewUrl: String, artworkUrl30: String) {
         self.trackId = trackId
         self.trackName = trackName
         self.collectionName = collectionName
         self.trackViewUrl = trackViewUrl
+        self.artworkUrl30 = artworkUrl30
     }
 
     // MARK: - Codable
@@ -36,6 +39,7 @@ final class Music: Identifiable, Codable {
         case trackName
         case collectionName
         case trackViewUrl
+        case artworkUrl30
     }
 
     required init(from decoder: Decoder) throws {
@@ -44,6 +48,7 @@ final class Music: Identifiable, Codable {
         self.trackName = try container.decode(String.self, forKey: .trackName)
         self.collectionName = try container.decode(String.self, forKey: .collectionName)
         self.trackViewUrl = try container.decode(String.self, forKey: .trackViewUrl)
+        self.artworkUrl30 = try container.decode(String.self, forKey: .artworkUrl30)
     }
 
     func encode(to encoder: Encoder) throws {
@@ -52,5 +57,6 @@ final class Music: Identifiable, Codable {
         try container.encode(trackName, forKey: .trackName)
         try container.encode(collectionName, forKey: .collectionName)
         try container.encode(trackViewUrl, forKey: .trackViewUrl)
+        try container.encode(artworkUrl30, forKey: .artworkUrl30)
     }
 }

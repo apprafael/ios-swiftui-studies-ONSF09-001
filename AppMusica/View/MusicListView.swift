@@ -16,6 +16,7 @@ struct MusicListView: View {
     @State private var isLoading = false
     @State private var searchText: String = ""
     @State private var hasSearched = false
+    @State private var showSheet = false
     
     @Query var favorites: [Music]
     
@@ -81,11 +82,16 @@ struct MusicListView: View {
             )
         } else {
             List(musics, id: \.trackId) { item in
-                Link(destination: URL(string: item.trackViewUrl)!) {
+                //Link(destination: URL(string: item.trackViewUrl)!) {
                     HStack {
-                        Image(systemName: "music.note")
-                            .font(.title3)
-                            .foregroundStyle(.blue)
+                        AsyncImage(url: URL(string: item.artworkUrl30)) { image in
+                            image
+                        } placeholder: {
+                            Image(systemName: "music.note")
+                                .font(.title3)
+                                .foregroundStyle(.blue)
+                        }
+
                         
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.trackName)
@@ -94,6 +100,9 @@ struct MusicListView: View {
                             Text(item.collectionName)
                                 .font(.subheadline)
                                 .foregroundStyle(.secondary)
+                        }
+                        .onTapGesture {
+                            showSheet = true
                         }
                         
                         Spacer()
@@ -107,7 +116,10 @@ struct MusicListView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(.vertical, 4)
-                }
+                    .sheet(isPresented: $showSheet) {
+                        Text("Sheet")
+                    }
+                //}
             }
             .listStyle(.plain)
         }
