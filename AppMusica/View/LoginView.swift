@@ -98,6 +98,9 @@ struct LoginView: View {
         .onChange(of: accounts) { _, _ in
             viewModel.accounts = accounts
         }
+        .onAppear {
+            viewModel.accounts = accounts
+        }
     }
 
     private func login() {
