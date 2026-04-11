@@ -91,4 +91,10 @@ final class PlayerViewModel: ObservableObject {
         player?.removeTimeObserver(timeObserver)
         self.timeObserver = nil
     }
+    
+    func formatTime(_ seconds: Double) -> String {
+        let minutes = Int(seconds) / 60
+        let secs = Int(seconds) % 60
+        return String(format: "%d:%02d", minutes, secs)
+    }
 }

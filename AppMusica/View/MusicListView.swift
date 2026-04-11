@@ -125,16 +125,7 @@ struct MusicListView: View {
             }
             .listStyle(.plain)
             .sheet(item: $selectedItem) { item in
-                AsyncImage(url: URL(string: item.artworkUrl100))
-                
-                Button("Play") {
-                    playerViewModel.setupPlayer(url: item.previewUrl)
-                    playerViewModel.play()
-                }
-                
-                Button("Pause") {
-                    playerViewModel.pause()
-                }
+                PlayerView(item: item)
             }
         }
     }
