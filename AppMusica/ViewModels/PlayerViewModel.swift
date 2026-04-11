@@ -11,8 +11,11 @@ import AVFoundation
 final class PlayerViewModel: ObservableObject {
     
     // MARK: - Published States
+    @Published private(set) var duration: TimeInterval = 0.0
+    @Published private(set) var currentTime: TimeInterval = 0.0
     @Published var isPlaying: Bool = false
     @Published var currentURL: String?
+    private var timeObserver: Any?
     
     // MARK: - Player
     private(set) var player: AVPlayer?
@@ -28,6 +31,8 @@ final class PlayerViewModel: ObservableObject {
         
         player = AVPlayer(url: url)
         currentURL = url.absoluteString
+        removePeriodicTimeObserver()
+        addPeriodicTimeObserver()
     }
     
     // MARK: - Controls
@@ -59,8 +64,31 @@ final class PlayerViewModel: ObservableObject {
             forName: .AVPlayerItemDidPlayToEndTime,
             object: player?.currentItem,
             queue: .main
-        ) { [weak self] _ in
+        ) { [weak self] item in
             self?.isPlaying = false
         }
+    }
+    
+    /// Adds an observer of the player timing.
+    private func addPeriodicTimeObserver() {
+        // Create a 0.5 second interval time.
+        let interval = CMTime(value: 1, timescale: 2)
+        timeObserver = player?.addPeriodicTimeObserver(forInterval: interval,
+                                                      queue: .main) { [weak self] time in
+            guard let self else { return }
+            // Update the published currentTime and duration values.
+            currentTime = time.seconds
+            duration = player?.currentItem?.duration.seconds ?? 0.0
+            
+            print("Timer: \(currentTime)")
+        }
+    }
+
+
+    /// Removes the time observer from the player.
+    private func removePeriodicTimeObserver() {
+        guard let timeObserver else { return }
+        player?.removeTimeObserver(timeObserver)
+        self.timeObserver = nil
     }
 }
