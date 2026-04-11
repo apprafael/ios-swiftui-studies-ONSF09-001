@@ -22,7 +22,7 @@ struct MusicListView: View {
     
     @Query var favorites: [Music]
     
-    var playerViewModel = MusicPlayerViewModel()
+    var playerViewModel = PlayerViewModel()
     
     var body: some View {
         ZStack {
@@ -124,14 +124,12 @@ struct MusicListView: View {
                         AsyncImage(url: URL(string: item.artworkUrl100))
                         
                         Button("Play") {
-                            if let url = URL(string: item.previewUrl) {
-                                playerViewModel.player = AVPlayer(url: url)
-                                playerViewModel.player?.play()
-                            }
+                            playerViewModel.setupPlayer(url: item.previewUrl)
+                            playerViewModel.play()
                         }
                         
                         Button("Pause") {
-                            playerViewModel.player?.pause()
+                            playerViewModel.pause()
                         }
                     }
                 //}
@@ -187,10 +185,6 @@ struct MusicListView: View {
         
         isLoading = false
     }
-}
-
-class MusicPlayerViewModel: ObservableObject {
-    var player: AVPlayer?
 }
 
 // MARK: - Preview
