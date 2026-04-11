@@ -18,7 +18,7 @@ struct MusicListView: View {
     @State private var isLoading = false
     @State private var searchText: String = ""
     @State private var hasSearched = false
-    @State private var showSheet = false
+    @State private var selectedItem: Music?
     
     @Query var favorites: [Music]
     
@@ -106,7 +106,7 @@ struct MusicListView: View {
                                 .foregroundStyle(.secondary)
                         }
                         .onTapGesture {
-                            showSheet = true
+                            selectedItem = item
                         }
                         
                         Spacer()
@@ -120,21 +120,22 @@ struct MusicListView: View {
                         .buttonStyle(.plain)
                     }
                     .padding(.vertical, 4)
-                    .sheet(isPresented: $showSheet) {
-                        AsyncImage(url: URL(string: item.artworkUrl100))
-                        
-                        Button("Play") {
-                            playerViewModel.setupPlayer(url: item.previewUrl)
-                            playerViewModel.play()
-                        }
-                        
-                        Button("Pause") {
-                            playerViewModel.pause()
-                        }
-                    }
+                    
                 //}
             }
             .listStyle(.plain)
+            .sheet(item: $selectedItem) { item in
+                AsyncImage(url: URL(string: item.artworkUrl100))
+                
+                Button("Play") {
+                    playerViewModel.setupPlayer(url: item.previewUrl)
+                    playerViewModel.play()
+                }
+                
+                Button("Pause") {
+                    playerViewModel.pause()
+                }
+            }
         }
     }
     
