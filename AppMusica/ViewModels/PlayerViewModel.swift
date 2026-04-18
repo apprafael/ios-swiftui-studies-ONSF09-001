@@ -103,8 +103,13 @@ final class PlayerViewModel: ObservableObject {
         }
     }
 
-    private func playNextSong() {
-        currentMusicIndex = musics.index(after: currentMusicIndex)
+    private func playNextSong() {        
+        if currentMusicIndex == musics.count - 1 {
+            currentMusicIndex = 0
+        } else {
+            currentMusicIndex = musics.index(after: currentMusicIndex)
+        }
+        
         selectedMusic = musics[currentMusicIndex]
         removePeriodicTimeObserver()
         currentTime = 0.0
