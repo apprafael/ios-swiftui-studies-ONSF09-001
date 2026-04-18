@@ -12,7 +12,7 @@ final class PlayerViewModel: ObservableObject {
     
     // MARK: - Published States
     @Published private(set) var duration: TimeInterval = 0.0
-    @Published private(set) var currentTime: TimeInterval = 0.0
+    @Published var currentTime: TimeInterval = 0.0
     @Published var isPlaying: Bool = false
     @Published var currentURL: String?
     private var timeObserver: Any?
@@ -56,6 +56,10 @@ final class PlayerViewModel: ObservableObject {
         player = nil
         currentURL = nil
         isPlaying = false
+    }
+    
+    func seetTo() {
+        player?.seek(to: CMTime(seconds: currentTime, preferredTimescale: 1000000))
     }
     
     // Mark: - Observer

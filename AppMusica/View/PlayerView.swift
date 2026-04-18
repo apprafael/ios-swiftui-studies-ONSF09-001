@@ -60,10 +60,12 @@ struct PlayerView: View {
                 .padding(.horizontal)
                 
                 VStack(spacing: 8) {
-                    ProgressView(value: playerViewModel.currentTime, total: playerViewModel.duration)
-                        .progressViewStyle(LinearProgressViewStyle(tint: .white))
-                        .frame(height: 4)
-                        .padding(.horizontal)
+                    Slider(value: $playerViewModel.currentTime, in: 0.0...playerViewModel.duration) { _ in
+                        playerViewModel.seetTo()
+                    }
+                    .progressViewStyle(LinearProgressViewStyle(tint: .white))
+                    .frame(height: 4)
+                    .padding(.horizontal)
                     
                     HStack {
                         Text(playerViewModel.formatTime(playerViewModel.currentTime))
