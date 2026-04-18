@@ -18,12 +18,11 @@ struct MusicListView: View {
     @State private var isLoading = false
     @State private var searchText: String = ""
     @State private var hasSearched = false
-    @State private var selectedItem: Music?
+    @State private var selectedMusicIndex: Int?
+    @State private var showPlayerSheet = false
     
     @Query var favorites: [Music]
-    
-    var playerViewModel = PlayerViewModel()
-    
+        
     var body: some View {
         ZStack {
             contentView
@@ -85,8 +84,7 @@ struct MusicListView: View {
                 description: Text("Tente pesquisar outro artista ou música.")
             )
         } else {
-            List(musics, id: \.trackId) { item in
-                //Link(destination: URL(string: item.trackViewUrl)!) {
+            List(musics.enumerated(), id: \.element.trackId) { index, item in
                     HStack {
                         AsyncImage(url: URL(string: item.artworkUrl30)) { image in
                             image
@@ -95,7 +93,6 @@ struct MusicListView: View {
                                 .font(.title3)
                                 .foregroundStyle(.blue)
                         }
-
                         
                         VStack(alignment: .leading, spacing: 4) {
                             Text(item.trackName)
@@ -106,7 +103,8 @@ struct MusicListView: View {
                                 .foregroundStyle(.secondary)
                         }
                         .onTapGesture {
-                            selectedItem = item
+                            selectedMusicIndex = index
+                            showPlayerSheet = true
                         }
                         
                         Spacer()
@@ -124,8 +122,9 @@ struct MusicListView: View {
                 //}
             }
             .listStyle(.plain)
-            .sheet(item: $selectedItem) { item in
-                PlayerView(item: item)
+            .sheet(isPresented: $showPlayerSheet) {
+                let playerViewModel = PlayerViewModel(currentMusicIndex: selectedMusicIndex ?? 0, musics: musics)
+                PlayerView(playerViewModel: playerViewModel)
             }
         }
     }

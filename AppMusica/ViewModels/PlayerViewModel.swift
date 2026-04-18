@@ -15,14 +15,25 @@ final class PlayerViewModel: ObservableObject {
     @Published var currentTime: TimeInterval = 0.0
     @Published var isPlaying: Bool = false
     @Published var currentURL: String?
+    @Published var currentMusicIndex: Int
+    @Published var musics: [Music]
+    @Published var selectedMusic: Music
+    
+    
     private var timeObserver: Any?
     
     // MARK: - Player
     private(set) var player: AVPlayer?
     
+    init(currentMusicIndex: Int, musics: [Music]) {
+        self.currentMusicIndex = currentMusicIndex
+        self.musics = musics
+        self.selectedMusic = musics[currentMusicIndex]
+    }
+    
     // MARK: - Setup
-    func setupPlayer(url: String) {
-        guard let url = URL(string: url) else { return }
+    func setupPlayer() {
+        guard let url = URL(string: selectedMusic.previewUrl) else { return }
         
         // Evita recriar o player se já for o mesmo áudio
         if currentURL == url.absoluteString {
@@ -85,9 +96,21 @@ final class PlayerViewModel: ObservableObject {
             duration = player?.currentItem?.duration.seconds ?? 0.0
             
             print("Timer: \(currentTime)")
+            
+            if currentTime == duration {
+                playNextSong()
+            }
         }
     }
 
+    private func playNextSong() {
+        currentMusicIndex = musics.index(after: currentMusicIndex)
+        selectedMusic = musics[currentMusicIndex]
+        removePeriodicTimeObserver()
+        currentTime = 0.0
+        setupPlayer()
+        play()
+    }
 
     /// Removes the time observer from the player.
     private func removePeriodicTimeObserver() {

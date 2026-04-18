@@ -9,8 +9,7 @@ import Combine
 import SwiftUI
 
 struct PlayerView: View {
-    var item: Music
-    @StateObject var playerViewModel = PlayerViewModel()
+    @StateObject var playerViewModel: PlayerViewModel
     
     var body: some View {
         ZStack {
@@ -28,7 +27,7 @@ struct PlayerView: View {
             VStack(spacing: 24) {
                 Spacer(minLength: 20)
                 
-                AsyncImage(url: URL(string: item.artworkUrl100)) { image in
+                AsyncImage(url: URL(string: playerViewModel.selectedMusic.artworkUrl100)) { image in
                     image
                         .resizable()
                         .scaledToFit()
@@ -47,13 +46,13 @@ struct PlayerView: View {
                 }
                 
                 VStack(spacing: 8) {
-                    Text(item.trackName)
+                    Text(playerViewModel.selectedMusic.trackName)
                         .font(.title2)
                         .fontWeight(.bold)
                         .foregroundColor(.white)
                         .multilineTextAlignment(.center)
                     
-                    Text(item.collectionName)
+                    Text(playerViewModel.selectedMusic.collectionName)
                         .font(.subheadline)
                         .foregroundColor(.white.opacity(0.8))
                 }
@@ -82,7 +81,7 @@ struct PlayerView: View {
                 }
                 
                 Button {
-                    playerViewModel.setupPlayer(url: item.previewUrl)
+                    playerViewModel.setupPlayer()
                     playerViewModel.togglePlayPause()
                 } label: {
                     Image(systemName: playerViewModel.isPlaying ? "pause.circle.fill" : "play.circle.fill")
